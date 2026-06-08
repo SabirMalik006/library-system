@@ -11,6 +11,8 @@ import SuggestionsPage from './pages/acquisition/SuggestionsPage'
 import PurchasingListPage from './pages/acquisition/PurchasingListPage'
 import OrdersPage from './pages/acquisition/OrdersPage'
 import VerifyPricePage from './pages/acquisition/VerifyPricePage'
+import StockTakingPage from './pages/stocktaking/StockTakingPage'
+import StartProcessPage from './pages/stocktaking/StartProcessPage'
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('dashboard')
@@ -34,6 +36,10 @@ export default function App() {
         return <OrdersPage />
       case 'acquisition-verify-price':
         return <VerifyPricePage />
+      case 'stocktaking-stock-taking':
+        return <StockTakingPage />
+      case 'stocktaking-start-process':
+        return <StartProcessPage />
       default:
         return <PlaceholderPage section={activeSection} />
     }

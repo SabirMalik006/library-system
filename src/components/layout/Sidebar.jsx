@@ -204,8 +204,11 @@ export default function Sidebar({ activeSection, onSelect, collapsed }) {
                       )}
                       <button
                         onClick={() => {
-                          if (hasSubitems && !collapsed) toggleOpen(item.section)
-                          onSelect(item.section)
+                          if (hasSubitems) {
+                            if (!collapsed) toggleOpen(item.section)
+                          } else {
+                            onSelect(item.section)
+                          }
                         }}
                         title={collapsed ? item.label : undefined}
                         className={`
