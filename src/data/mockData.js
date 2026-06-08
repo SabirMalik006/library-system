@@ -158,3 +158,54 @@ export const libraryNews = [
   { id: 2, title: 'New Database Access', excerpt: 'Access to JSTOR and ProQuest now available for all members.', date: 'June 3, 2026', tag: 'Resource' },
   { id: 3, title: 'Maintenance Notice', excerpt: 'Library catalog will be offline June 10, 2-4 AM for upgrades.', date: 'June 1, 2026', tag: 'Notice' },
 ]
+
+export const suppliers = [
+  { id: 1, name: 'A & Z Enterprises' },
+  { id: 2, name: 'A B C, Lahore' },
+  { id: 3, name: 'ABSCO Books and Subscription Services' },
+  { id: 4, name: 'Academic Book Corporation' },
+  { id: 5, name: 'Adm Offr Ministry of Defence' },
+  { id: 6, name: 'Advance Publications' },
+  { id: 7, name: 'Aero Asian Book Co' },
+  { id: 8, name: 'Afrasiab Collection' },
+  { id: 9, name: 'Al-Ehsan Newspaper Agency(M. Hussain)' },
+  { id: 10, name: 'Ali Publishing Company' },
+  { id: 11, name: 'Allied Book Co' },
+  { id: 12, name: 'American Book Company' },
+  { id: 13, name: 'AQ Branche Office' },
+  { id: 14, name: 'Armed Forces War College Islamabad' },
+  { id: 15, name: 'Army Education Press' },
+  { id: 16, name: 'Asia Foundation' },
+  { id: 17, name: 'Begum Lt Gen (R) Ejaz Azim' },
+  { id: 18, name: 'Better Books' },
+]
+
+export const budgets = [
+  { id: 1, session: '2011', totalBudget: 10000.00, remainingBudget: 5000.00 },
+  { id: 2, session: '2016/2017', totalBudget: 30000000.00, remainingBudget: 25575000.00 },
+]
+
+export const budgetAllocations = [
+  { id: 1, category: 'Books', actualAmount: 500000, remainingAmount: 200000 },
+  { id: 2, category: 'Journals', actualAmount: 200000, remainingAmount: 50000 },
+  { id: 3, category: 'E-Resources', actualAmount: 1000000, remainingAmount: 800000 },
+]
+
+export const suggestions = [
+  { id: 1, title: "Pakistan's defence policy 1947-1958", author: 'PERVAIZ IQBAL CHEEMA', memberId: 'APWCF069', name: 'Brig Kamran Tabrez Savera, DS (Army)' },
+  { id: 2, title: "Layman's guide to naval strategy", author: 'Bernard Brodie', memberId: 'APWCF105', name: 'Cdre Chaudhry Sajjad Akber Khan, SI (M)' },
+  { id: 3, title: 'Afghanistan politics and economics in a globalising state', author: 'Ibrahimi', memberId: 'APWCF107', name: 'Brig Aman Ullah, DS (Army)' },
+  { id: 4, title: 'Storm before the calm', author: 'George Friedman', memberId: 'AODF06', name: 'Brig Asad Ullah Dogar, DS (Coord) AOD' },
+  { id: 5, title: 'Leadership: Six Studies In World Strategy', author: 'Henry Kissinger', memberId: 'AODF06', name: 'Brig Asad Ullah Dogar, DS (Coord) AOD' },
+  { id: 6, title: 'The last war', author: 'Pravin sawhney', memberId: 'AODF06', name: 'Brig Asad Ullah Dogar, DS (Coord) AOD' },
+]
+
+export const purchasingList = [
+  { id: 1, title: 'The Art of War', author: 'Sun Tzu', purchaseDate: '2026-06-01' },
+  { id: 2, title: 'Diplomacy', author: 'Henry Kissinger', purchaseDate: '2026-06-05' },
+]
+
+export const orders = [
+  { id: 1, orderNo: 'ORD-2026-001', supplier: 'A & Z Enterprises', orderDate: '2026-06-02', status: 'Pending' },
+  { id: 2, orderNo: 'ORD-2026-002', supplier: 'Academic Book Corporation', orderDate: '2026-06-04', status: 'Approved' },
+]
