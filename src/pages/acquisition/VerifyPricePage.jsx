@@ -8,7 +8,7 @@ export default function VerifyPricePage() {
       {/* Breadcrumb */}
       <div className="px-4 py-2 bg-surface-hover-light border-b border-surface-border">
         <div className="flex items-center gap-2 text-xs">
-          <span className="text-text-secondary">Library</span>
+          <span className="text-text-secondary">Acquisition</span>
           <span className="text-text-muted">/</span>
           <span className="font-semibold text-text-primary">Price Verification</span>
         </div>

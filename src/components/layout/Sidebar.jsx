@@ -217,10 +217,10 @@ export default function Sidebar({ activeSection, onSelect, collapsed }) {
                             ? 'justify-center h-9 w-9 mx-auto'
                             : 'gap-2.5 px-2.5 py-1.5'
                           }
-                          ${active
+                          ${activeSection === item.section
                             ? 'text-white bg-brand-500 font-medium'
                             : parentActive
-                              ? 'text-brand-500'
+                              ? 'text-brand-600 bg-brand-50 font-medium'
                               : 'text-text-secondary hover:bg-surface-hover hover:text-text-primary'
                           }
                         `}
@@ -233,7 +233,13 @@ export default function Sidebar({ activeSection, onSelect, collapsed }) {
                       {!collapsed && hasSubitems && (
                         <button
                           onClick={() => toggleOpen(item.section)}
-                          className="p-1 mr-0.5 rounded text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors"
+                          className={`p-1 mr-0.5 rounded transition-colors
+                            ${activeSection === item.section
+                              ? 'text-white/80 hover:text-white hover:bg-white/10'
+                              : parentActive
+                                ? 'text-brand-500 hover:bg-brand-100'
+                                : 'text-text-muted hover:text-text-primary hover:bg-surface-hover'
+                            }`}
                         >
                           <ChevronDown size={13} className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                         </button>
@@ -254,13 +260,13 @@ export default function Sidebar({ activeSection, onSelect, collapsed }) {
                                   className={`
                                     w-full text-left text-[12px] py-1.5 pl-8 pr-2.5 rounded-md transition-colors duration-150
                                     ${subActive
-                                      ? 'text-brand-600 bg-brand-50 font-medium'
+                                      ? 'text-white bg-brand-500 font-medium shadow-sm'
                                       : 'text-text-muted hover:text-text-secondary hover:bg-surface-hover'
                                     }
                                   `}
                                 >
                                   <span className={`absolute left-[14px] top-1/2 -translate-y-1/2 w-2 h-px rounded-full
-                                    ${subActive ? 'bg-brand-400' : 'bg-surface-border'}`} />
+                                    ${subActive ? 'bg-white/60' : 'bg-surface-border'}`} />
                                   {sub.label}
                                 </button>
                               </li>
