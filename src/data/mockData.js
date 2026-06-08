@@ -1,3 +1,4 @@
+import { BookOpen, Users, TrendingUp, HardDrive } from 'lucide-react'
 import forumIcon from '../assets/icons/forum.svg'
 import uploadIcon from '../assets/icons/upload.svg'
 import searchIcon from '../assets/icons/search.svg'
@@ -9,14 +10,16 @@ export const user = {
   location: 'SYK Library, NDU, E-9, Islamabad',
   role: 'Administrator',
   avatar: 'https://syklibrary.ndu.edu.pk/libmax/Administrator/Profile/umar_11zon.jpg',
+  joinDate: 'Jan 2020',
+  department: 'Library Services',
 }
 
 export const overDueBooks = [
-  { id: 1, title: 'Islamic Studies for CSS PMS PCS and All Others', dueDate: '2026-05-20', days: 16 },
-  { id: 2, title: 'Trek to Pakistan',                               dueDate: '2026-05-22', days: 14 },
-  { id: 3, title: 'Ghaibi Insaan',                                  dueDate: '2026-05-25', days: 11 },
-  { id: 4, title: 'Wafa Ka Tazkira',                                dueDate: '2026-05-28', days: 8  },
-  { id: 5, title: 'Military Geography',                             dueDate: '2026-05-30', days: 6  },
+  { id: 1, title: 'Islamic Studies for CSS PMS PCS and All Others', dueDate: '2026-05-20', days: 16, member: 'Ali Khan' },
+  { id: 2, title: 'Trek to Pakistan',                               dueDate: '2026-05-22', days: 14, member: 'Sara Ahmed' },
+  { id: 3, title: 'Ghaibi Insaan',                                  dueDate: '2026-05-25', days: 11, member: 'Usman Riaz' },
+  { id: 4, title: 'Wafa Ka Tazkira',                                dueDate: '2026-05-28', days: 8,  member: 'Fatima Noor' },
+  { id: 5, title: 'Military Geography',                             dueDate: '2026-05-30', days: 6,  member: 'Hamza Ali' },
 ]
 
 export const freshArrivals = [
@@ -40,6 +43,8 @@ export const digitalCollection = [
   { id: 1, title: 'Foreign Policy - Fall 2024', type: 'Journal', size: '12.4 MB' },
   { id: 2, title: 'Defence Journal - March 2025', type: 'Journal', size: '8.2 MB' },
   { id: 3, title: 'ISSI Report Q1 2025', type: 'Report', size: '5.7 MB' },
+  { id: 4, title: 'Strategic Studies Quarterly', type: 'Journal', size: '15.1 MB' },
+  { id: 5, title: 'NDU Research Brief 2025', type: 'Report', size: '3.4 MB' },
 ]
 
 export const periodicals = [
@@ -68,17 +73,49 @@ export const navLinks = [
 
 export const statsData = [
   {
+    label: 'Total Books',
+    value: 24680,
+    delta: '+1,240 this year',
+    color: 'blue',
+    imageUrl: null,
+    icon: BookOpen,
+  },
+  {
+    label: 'Active Members',
+    value: 5840,
+    delta: '+320 this quarter',
+    color: 'green',
+    imageUrl: null,
+    icon: Users,
+  },
+  {
+    label: 'Issued Today',
+    value: 127,
+    delta: '12 overdue',
+    color: 'amber',
+    imageUrl: null,
+    icon: TrendingUp,
+  },
+  {
+    label: 'Digital Resources',
+    value: 15200,
+    delta: '+890 this month',
+    color: 'purple',
+    imageUrl: null,
+    icon: HardDrive,
+  },
+  {
     label: 'Forum',
     value: '-',
     delta: 'Open discussions',
-    color: 'cyan',
+    color: 'blue',
     imageUrl: forumIcon,
   },
   {
     label: 'Upload',
     value: '-',
     delta: 'Upload resources',
-    color: 'lime',
+    color: 'green',
     imageUrl: uploadIcon,
   },
   {
@@ -106,4 +143,18 @@ export const categoryDistribution = [
   { name: 'History',     value: 15 },
   { name: 'Fiction',     value: 10 },
   { name: 'Others',      value: 7  },
+]
+
+export const recentActivity = [
+  { id: 1, action: 'Book Issued', item: 'Artificial Intelligence: A Modern Approach', user: 'Ahmed Hassan', time: '2 min ago', type: 'issue' },
+  { id: 2, action: 'Book Returned', item: 'Contemporary Strategy Analysis', user: 'Sana Malik', time: '15 min ago', type: 'return' },
+  { id: 3, action: 'New Member', item: 'Dr. Faisal Khan registered', user: '', time: '1 hour ago', type: 'member' },
+  { id: 4, action: 'Overdue Notice', item: 'Islamic Studies for CSS', user: 'Ali Khan', time: '2 hours ago', type: 'overdue' },
+  { id: 5, action: 'Book Acquired', item: 'Geopolitics in a Multipolar World', user: 'Acquisition Dept', time: '3 hours ago', type: 'acquire' },
+]
+
+export const libraryNews = [
+  { id: 1, title: 'Summer Reading Program Launched', excerpt: 'Join our summer reading challenge. Prizes for top readers!', date: 'June 5, 2026', tag: 'Event' },
+  { id: 2, title: 'New Database Access', excerpt: 'Access to JSTOR and ProQuest now available for all members.', date: 'June 3, 2026', tag: 'Resource' },
+  { id: 3, title: 'Maintenance Notice', excerpt: 'Library catalog will be offline June 10, 2-4 AM for upgrades.', date: 'June 1, 2026', tag: 'Notice' },
 ]

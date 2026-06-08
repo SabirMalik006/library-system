@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import {
   LayoutDashboard, ShoppingCart, Package, RefreshCw, BookOpen,
   Monitor, ArrowLeftRight, Newspaper, FileText, Link,
-  GraduationCap, MessageSquare, Rss, Settings, BarChart2,
-  Library, ChevronRight,
+  GraduationCap, MessageSquare, Rss, Settings, BarChart3,
+  Library, ChevronDown,
 } from 'lucide-react'
 
 const iconMap = {
@@ -16,7 +16,7 @@ const navGroups = [
   {
     label: 'Main',
     items: [
-      { label: 'Dashboard',         icon: 'LayoutDashboard', section: 'dashboard'   },
+      { label: 'Dashboard', icon: 'LayoutDashboard', section: 'dashboard' },
     ],
   },
   {
@@ -126,112 +126,145 @@ const navGroups = [
   {
     label: 'Admin',
     items: [
-      { label: 'Feedback',          icon: 'MessageSquare',   section: 'feedback'    },
-      { label: 'Library News',      icon: 'Rss',             section: 'news'        },
+      { label: 'Feedback',       icon: 'MessageSquare', section: 'feedback' },
+      { label: 'Library News',   icon: 'Rss',           section: 'news'     },
     ],
   },
 ]
 
 export default function Sidebar({ activeSection, onSelect, collapsed }) {
-  const [openSections, setOpenSections] = useState([])
-
-  const toggleOpenSection = section => {
-    setOpenSections(prev =>
-      prev.includes(section)
-        ? prev.filter(item => item !== section)
-        : [...prev, section]
+  const [openSections, setOpenSections] = useState(() => {
+    const set = new Set()
+    navGroups.forEach(g =>
+      g.items.forEach(item => {
+        if (item.subitems?.some(s => s.section === activeSection)) set.add(item.section)
+      })
     )
-  }
+    return set
+  })
+
+  const toggleOpen = useCallback(section => {
+    setOpenSections(prev => {
+      const next = new Set(prev)
+      if (next.has(section)) next.delete(section)
+      else next.add(section)
+      return next
+    })
+  }, [])
+
+  const isActive = item =>
+    activeSection === item.section ||
+    item.subitems?.some(s => activeSection === s.section)
+
+  const isParentOfActive = item =>
+    item.subitems?.some(s => activeSection === s.section)
 
   return (
     <aside
-      className={`
-        flex flex-col h-full bg-surface-card border-r border-surface-border
-        transition-all duration-300
-        ${collapsed ? 'w-16' : 'w-60'}
-      `}
+      className={`flex flex-col h-full bg-surface-card border-r border-surface-border
+        transition-all duration-200 ease-out z-20 select-none
+        ${collapsed ? 'w-[52px]' : 'w-56'}`}
     >
-      {/* Logo */}
-      <div className={`flex items-center gap-3 px-4 py-5 border-b border-surface-border ${collapsed ? 'justify-center' : ''}`}>
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-cyan to-brand-700 flex items-center justify-center flex-shrink-0">
-          <Library size={16} className="text-surface" />
+      {/* Brand */}
+      <div className={`flex items-center h-12 border-b border-surface-border
+        ${collapsed ? 'justify-center' : 'gap-2.5 px-3'}`}>
+        <div className="w-6 h-6 rounded bg-brand-500 flex items-center justify-center shrink-0">
+          <Library size={12} className="text-white" />
         </div>
         {!collapsed && (
-          <div>
-            <p className="font-display font-700 text-sm text-slate-100 leading-tight">SYK Library</p>
-            <p className="text-[10px] text-slate-500 font-mono">NDU · E-9 Islamabad</p>
+          <div className="min-w-0 leading-tight">
+            <p className="text-[13px] font-semibold text-text-primary">SYK Library</p>
+            <p className="text-[9px] text-text-muted">NDU &middot; Islamabad</p>
           </div>
         )}
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-5">
-        {navGroups.map(group => (
-          <div key={group.label}>
+      <nav className="flex-1 overflow-y-auto py-3 px-1.5 scrollbar-hide">
+        {navGroups.map((group, gi) => (
+          <div key={group.label} className={gi > 0 ? 'mt-5' : ''}>
             {!collapsed && (
-              <p className="text-[10px] font-mono uppercase tracking-widest text-slate-600 px-3 mb-1.5">
+              <p className="px-2 mb-1 text-[10px] font-semibold uppercase tracking-wider text-text-muted">
                 {group.label}
               </p>
             )}
             <ul className="space-y-0.5">
               {group.items.map(item => {
                 const Icon = iconMap[item.icon]
-                const active = activeSection === item.section
-                const hasSubitems = item.subitems && item.subitems.length > 0
-                const isOpen = openSections.includes(item.section)
+                const active = isActive(item)
+                const parentActive = isParentOfActive(item)
+                const hasSubitems = item.subitems?.length > 0
+                const isOpen = openSections.has(item.section)
+
                 return (
                   <li key={item.section}>
-                    <div className="flex items-center gap-2">
+                    <div className="relative flex items-center">
+                      {active && !collapsed && (
+                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-brand-500 rounded-r-full" />
+                      )}
                       <button
-                        onClick={() => onSelect(item.section)}
-                      title={collapsed ? item.label : undefined}
-                      className={`
-                        w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
-                        transition-all duration-200 group
-                        ${active
-                          ? 'bg-brand-900/60 text-accent-cyan border border-brand-700/40'
-                          : 'text-slate-400 hover:bg-surface-hover hover:text-slate-200'}
-                        ${collapsed ? 'justify-center' : ''}
-                      `}
-                    >
-                      {Icon && <Icon size={16} className="flex-shrink-0" />}
-                      {!collapsed && <span className="flex-1 text-left font-body">{item.label}</span>}
-                      {!collapsed && active && <ChevronRight size={12} className="text-accent-cyan" />}
-                    </button>
-                    {!collapsed && hasSubitems && (
-                      <button
-                        type="button"
-                        onClick={e => {
-                          e.stopPropagation()
-                          toggleOpenSection(item.section)
+                        onClick={() => {
+                          if (hasSubitems && !collapsed) toggleOpen(item.section)
+                          onSelect(item.section)
                         }}
-                        className={`p-2 rounded-lg text-slate-400 hover:text-accent-cyan hover:bg-surface-hover transition-all duration-200 ${active ? 'text-accent-cyan' : ''}`}
+                        title={collapsed ? item.label : undefined}
+                        className={`
+                          flex items-center w-full rounded-md text-sm transition-colors duration-150
+                          ${collapsed
+                            ? 'justify-center h-9 w-9 mx-auto'
+                            : 'gap-2.5 px-2.5 py-1.5'
+                          }
+                          ${active
+                            ? 'text-white bg-brand-500 font-medium'
+                            : parentActive
+                              ? 'text-brand-500'
+                              : 'text-text-secondary hover:bg-surface-hover hover:text-text-primary'
+                          }
+                        `}
                       >
-                        <ChevronRight size={14} className={`transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} />
+                        {Icon && <Icon size={16} className="shrink-0" />}
+                        {!collapsed && (
+                          <span className="flex-1 text-left text-[13px] truncate">{item.label}</span>
+                        )}
                       </button>
-                    )}
+                      {!collapsed && hasSubitems && (
+                        <button
+                          onClick={() => toggleOpen(item.section)}
+                          className="p-1 mr-0.5 rounded text-text-muted hover:text-text-primary hover:bg-surface-hover transition-colors"
+                        >
+                          <ChevronDown size={13} className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                        </button>
+                      )}
                     </div>
+
                     {!collapsed && hasSubitems && (
-                      <ul className={`mt-1 space-y-1 pl-9 overflow-hidden transition-all duration-200 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-                        {item.subitems.map(subitem => {
-                          const subActive = activeSection === subitem.section
-                          return (
-                            <li key={subitem.section}>
-                              <button
-                                onClick={() => onSelect(subitem.section)}
-                                className={
-                                  `w-full text-left text-[11px] font-body rounded-xl px-3 py-2 transition-all duration-200
-                                  ${subActive
-                                    ? 'bg-brand-900/50 text-accent-cyan border border-brand-700/40'
-                                    : 'text-slate-500 hover:bg-surface-hover hover:text-slate-200'}`
-                                }
-                              >
-                                {subitem.label}
-                              </button>
-                            </li>
-                          )
-                        })}
-                      </ul>
+                      <div className={`overflow-hidden transition-all duration-200 ease-out
+                        ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <ul className="mt-0.5 space-y-0.5 relative">
+                          <div className="absolute left-[18px] top-0 bottom-0 w-px bg-surface-border" />
+                          {item.subitems.map(sub => {
+                            const subActive = activeSection === sub.section
+                            return (
+                              <li key={sub.section} className="relative">
+                                <button
+                                  onClick={() => onSelect(sub.section)}
+                                  className={`
+                                    w-full text-left text-[12px] py-1.5 pl-8 pr-2.5 rounded-md transition-colors duration-150
+                                    ${subActive
+                                      ? 'text-brand-600 bg-brand-50 font-medium'
+                                      : 'text-text-muted hover:text-text-secondary hover:bg-surface-hover'
+                                    }
+                                  `}
+                                >
+                                  <span className={`absolute left-[14px] top-1/2 -translate-y-1/2 w-2 h-px rounded-full
+                                    ${subActive ? 'bg-brand-400' : 'bg-surface-border'}`} />
+                                  {sub.label}
+                                </button>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </div>
                     )}
                   </li>
                 )
@@ -241,21 +274,21 @@ export default function Sidebar({ activeSection, onSelect, collapsed }) {
         ))}
       </nav>
 
-      {/* Bottom links */}
-      <div className={`border-t border-surface-border px-2 py-3 space-y-0.5`}>
+      {/* Bottom */}
+      <div className="border-t border-surface-border py-1.5 px-1.5 space-y-0.5">
         {[
-          { icon: BarChart2, label: 'Reports' },
+          { icon: BarChart3, label: 'Reports' },
           { icon: Settings, label: 'Settings' },
         ].map(({ icon: Icon, label }) => (
           <button
             key={label}
             title={collapsed ? label : undefined}
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-400
-              hover:bg-surface-hover hover:text-slate-200 transition-all duration-200 font-body
-              ${collapsed ? 'justify-center' : ''}`}
+            className={`flex items-center rounded-md text-sm text-text-secondary
+              hover:text-text-primary hover:bg-surface-hover transition-colors duration-150
+              ${collapsed ? 'justify-center h-9 w-9 mx-auto' : 'gap-2.5 px-2.5 py-1.5 w-full'}`}
           >
-            <Icon size={16} className="flex-shrink-0" />
-            {!collapsed && <span>{label}</span>}
+            <Icon size={16} className="shrink-0" />
+            {!collapsed && <span className="text-[13px]">{label}</span>}
           </button>
         ))}
       </div>

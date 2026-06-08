@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,47 +9,50 @@ export default {
     extend: {
       colors: {
         brand: {
-          50:  '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50:  '#e8f5ec',
+          100: '#c8e6d3',
+          200: '#a8d7bb',
+          300: '#76c79a',
+          400: '#4db87a',
+          500: '#0f6a3d',
+          600: '#0d4d2c',
+          700: '#0a3d23',
+          800: '#072e1a',
+          900: '#051f11',
         },
         surface: {
-          DEFAULT: '#0f1117',
-          card:    '#161b27',
-          border:  '#1e2536',
-          hover:   '#1c2333',
+          DEFAULT: 'var(--color-surface)',
+          card:    'var(--color-surface-card)',
+          border:  'var(--color-surface-border)',
+          'border-soft': 'var(--color-surface-border-soft)',
+          'border-half': 'var(--color-surface-border-half)',
+          hover:   'var(--color-surface-hover)',
+          'hover-soft': 'var(--color-surface-hover-soft)',
+          'hover-light': 'var(--color-surface-hover-light)',
         },
         accent: {
-          cyan:   '#22d3ee',
-          lime:   '#a3e635',
-          amber:  '#fbbf24',
-          rose:   '#fb7185',
-          violet: '#a78bfa',
+          green:  '#2fa66a',
+          amber:  '#f59e0b',
+          rose:   '#ef4444',
+          purple: '#8b5cf6',
+        },
+        text: {
+          primary:   'var(--color-text-primary)',
+          secondary: 'var(--color-text-secondary)',
+          muted:     'var(--color-text-muted)',
         }
       },
       fontFamily: {
-        display: ['"Syne"', 'sans-serif'],
-        body:    ['"DM Sans"', 'sans-serif'],
-        mono:    ['"JetBrains Mono"', 'monospace'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'sans-serif'],
+        mono: ['"SF Mono"', '"Fira Code"', '"Fira Mono"', '"Roboto Mono"', 'Consolas', 'monospace'],
       },
-      backgroundImage: {
-        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0z' fill='none'/%3E%3Cpath d='M0 40L40 0M0 0l40 40' stroke='%231e2536' stroke-width='.5'/%3E%3C/svg%3E\")",
+      boxShadow: {
+        'card': 'var(--shadow-card)',
+        'card-hover': 'var(--shadow-card-hover)',
       },
-      animation: {
-        'fade-in':    'fadeIn .4s ease forwards',
-        'slide-up':   'slideUp .5s ease forwards',
-        'pulse-slow': 'pulse 3s cubic-bezier(.4,0,.6,1) infinite',
-      },
-      keyframes: {
-        fadeIn:  { from: { opacity: 0 }, to: { opacity: 1 } },
-        slideUp: { from: { opacity: 0, transform: 'translateY(16px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+      borderRadius: {
+        'pill': '9999px',
+        'card': '1.25rem',
       },
     },
   },
