@@ -18,7 +18,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 export default function CategoryDonut() {
   return (
-    <div className="card p-5">
+    <div className="card p-4 sm:p-5">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-text-primary">Collection by Category</h3>
         <p className="text-xs text-text-muted mt-0.5">Distribution across 6 domains</p>
@@ -52,13 +52,13 @@ export default function CategoryDonut() {
         </div>
       </div>
 
-      <ul className="space-y-2.5 mt-4 pt-4 border-t border-surface-border-soft">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-x-4 gap-y-2.5 mt-4 pt-4 border-t border-surface-border-soft">
         {categoryDistribution.map((item, i) => (
-          <li key={item.name} className="flex items-center gap-2.5">
+          <li key={item.name} className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full shrink-0" style={{ background: COLORS[i] }} />
-            <span className="text-xs text-text-secondary flex-1">{item.name}</span>
-            <span className="text-[11px] text-text-muted font-mono tabular-nums">{item.value}%</span>
-            <div className="w-16 h-1.5 rounded-full bg-surface-border-half overflow-hidden">
+            <span className="text-[11px] sm:text-xs text-text-secondary flex-1 truncate">{item.name}</span>
+            <span className="text-[10px] text-text-muted font-mono tabular-nums">{item.value}%</span>
+            <div className="hidden xs:block w-12 sm:w-16 h-1 rounded-full bg-surface-border-half overflow-hidden shrink-0">
               <div className="h-full rounded-full" style={{ width: `${item.value}%`, background: COLORS[i] }} />
             </div>
           </li>

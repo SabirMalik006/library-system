@@ -33,17 +33,17 @@ function AnimatedValue({ value, className }) {
     return () => obs.disconnect()
   }, [value])
 
-  if (typeof value !== 'number') return <p className={`text-3xl font-bold leading-none ${className}`}>{value}</p>
-  return <p ref={ref} className={`text-3xl font-bold leading-none tabular-nums ${className}`}>{displayed.toLocaleString()}</p>
+  if (typeof value !== 'number') return <p className={`text-2xl sm:text-3xl font-bold leading-none ${className}`}>{value}</p>
+  return <p ref={ref} className={`text-2xl sm:text-3xl font-bold leading-none tabular-nums ${className}`}>{displayed.toLocaleString()}</p>
 }
 
 export default function StatCard({ label, value, delta, color, icon: Icon, imageUrl }) {
   const c = colorMap[color] || colorMap.blue
 
   return (
-    <div className="card-hover p-5 relative">
-      <div className="flex items-center justify-between mb-5">
-        <div className="w-10 h-10 rounded-full border border-surface-border-soft flex items-center justify-center bg-surface-card">
+    <div className="card-hover p-4 sm:p-5 relative">
+      <div className="flex items-center justify-between mb-4 sm:mb-5">
+        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-surface-border-soft flex items-center justify-center bg-surface-card">
           {imageUrl ? (
             <img src={imageUrl} alt={label} className="w-4 h-4 object-contain" />
           ) : (

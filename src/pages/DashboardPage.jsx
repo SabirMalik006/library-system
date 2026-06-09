@@ -41,17 +41,17 @@ function SectionHeader({ icon: Icon, color, title, subtitle, action }) {
 
 export default function DashboardPage() {
   return (
-    <div className="p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto">
-      <div className="flex items-center justify-between">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-[1600px] mx-auto">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-text-primary">Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-text-primary">Dashboard</h1>
           <div className="flex items-center gap-2 mt-1 text-xs text-text-muted">
             <span>Fri, 05 Jun 2026</span>
             <span className="w-1 h-1 rounded-full bg-text-muted opacity-40" />
             <span>Good Afternoon</span>
           </div>
         </div>
-        <span className="flex items-center gap-1.5 text-xs font-medium text-accent-green bg-accent-green/10 px-3 py-1.5 rounded-full border border-accent-green/20">
+        <span className="flex items-center self-start sm:self-auto gap-1.5 text-[10px] sm:text-xs font-medium text-accent-green bg-accent-green/10 px-3 py-1.5 rounded-full border border-accent-green/20">
           <span className="w-1.5 h-1.5 rounded-full bg-accent-green" />
           All Systems Operational
         </span>
@@ -59,7 +59,7 @@ export default function DashboardPage() {
 
       <ProfileCard />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
         {statsData.slice(0, 4).map(s => (
           <StatCard key={s.label} {...s} />
         ))}
@@ -69,17 +69,21 @@ export default function DashboardPage() {
         <div className="xl:col-span-2">
           <CirculationChart />
         </div>
-        <CategoryDonut />
+        <div className="w-full overflow-hidden">
+          <CategoryDonut />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2">
           <CirculationAreaChart />
         </div>
-        <CategoryPieChart />
+        <div className="w-full overflow-hidden">
+          <CategoryPieChart />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         <div className="card p-5">
           <SectionHeader
             icon={Rss}
@@ -98,59 +102,63 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <p className="text-xs text-text-secondary leading-relaxed mt-1">{news.excerpt}</p>
-                <p className="text-[10px] text-text-muted mt-2">{news.date}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="xl:col-span-2 card p-5">
+        <OverduePanel />
+        <FreshArrivals />
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="card p-5">
           <SectionHeader
             icon={Activity}
             color="purple"
             title="Recent Activity"
-            subtitle="Library operations log"
+            subtitle="Live library events"
           />
-          <div className="divide-y divide-surface-border-soft">
-            {recentActivity.map(act => (
-              <div key={act.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0 hover:bg-surface-hover -mx-2 px-2 rounded-lg transition-colors">
-                <span className={`w-2 h-2 rounded-full shrink-0 ${
-                  act.type === 'issue' ? 'bg-brand-500' :
-                  act.type === 'return' ? 'bg-accent-green' :
-                  act.type === 'member' ? 'bg-accent-purple' :
-                  act.type === 'overdue' ? 'bg-accent-amber' :
-                  'bg-accent-rose'
-                }`} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-text-primary truncate">
-                    <span className="font-medium">{act.action}</span>
-                    {act.item && <span className="text-text-secondary"> &mdash; {act.item}</span>}
+          <div className="space-y-4">
+            {recentActivity.map((activity, i) => (
+              <div key={i} className="flex gap-3">
+                <div className="w-8 h-8 rounded-full bg-surface-hover flex items-center justify-center shrink-0">
+                  <Activity size={12} className="text-brand-500" />
+                </div>
+                <div>
+                  <p className="text-xs text-text-primary">
+                    <span className="font-semibold">{activity.user}</span> {activity.action}
                   </p>
-                  <p className="text-[11px] text-text-muted mt-0.5">
-                    {act.user && <>{act.user} &middot; </>}
-                    {act.time}
-                  </p>
+                  <p className="text-[10px] text-text-muted mt-0.5">{activity.time}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <DigitalCollectionPanel />
         <PeriodicalsPanel />
+        <DigitalCollectionPanel />
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <OverduePanel />
-        <FreshArrivals />
-      </div>
-
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
-        {statsData.slice(4).map(s => (
-          <ActionCard key={s.label} {...s} />
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <ActionCard
+          title="Member Registration"
+          desc="Register new library members"
+          icon="UserPlus"
+          color="blue"
+        />
+        <ActionCard
+          title="Catalog Search"
+          desc="Search physical collections"
+          icon="Search"
+          color="purple"
+        />
+        <ActionCard
+          title="Generate Reports"
+          desc="Library usage & stats"
+          icon="FileBarChart"
+          color="green"
+        />
       </div>
     </div>
   )

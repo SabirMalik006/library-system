@@ -162,17 +162,17 @@ export default function Sidebar({ activeSection, onSelect, collapsed }) {
   return (
     <aside
       className={`flex flex-col h-full bg-surface-card border-r border-surface-border
-        transition-all duration-200 ease-out z-20 select-none
-        ${collapsed ? 'w-[52px]' : 'w-56'}`}
+        transition-all duration-200 ease-out z-20 select-none shadow-xl lg:shadow-none
+        ${collapsed ? 'w-[52px]' : 'w-64 lg:w-56'}`}
     >
       {/* Brand */}
-      <div className={`flex items-center h-12 border-b border-surface-border
-        ${collapsed ? 'justify-center' : 'gap-2.5 px-3'}`}>
+      <div className={`flex items-center h-14 border-b border-surface-border
+        ${collapsed ? 'justify-center' : 'gap-2.5 px-4'}`}>
         <div className="w-6 h-6 rounded bg-brand-500 flex items-center justify-center shrink-0">
           <Library size={12} className="text-white" />
         </div>
         {!collapsed && (
-          <div className="min-w-0 leading-tight">
+          <div className="min-w-0 leading-tight flex-1">
             <p className="text-[13px] font-semibold text-text-primary">SYK Library</p>
             <p className="text-[9px] text-text-muted">NDU &middot; Islamabad</p>
           </div>

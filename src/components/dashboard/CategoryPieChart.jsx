@@ -18,7 +18,7 @@ const CustomTooltip = ({ active, payload }) => {
 
 export default function CategoryPieChart() {
   return (
-    <div className="card p-5">
+    <div className="card p-4 sm:p-5">
       <div className="mb-4">
         <h3 className="text-sm font-semibold text-text-primary">Category Distribution</h3>
         <p className="text-xs text-text-muted mt-0.5">Breakdown by subject area</p>
@@ -29,8 +29,8 @@ export default function CategoryPieChart() {
           <Pie
             data={categoryDistribution}
             cx="50%" cy="50%"
-            innerRadius={55}
-            outerRadius={85}
+            innerRadius={50}
+            outerRadius={75}
             paddingAngle={3}
             dataKey="value"
             stroke="none"
@@ -43,11 +43,11 @@ export default function CategoryPieChart() {
         </PieChart>
       </ResponsiveContainer>
 
-      <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 justify-center">
+      <div className="flex flex-wrap gap-x-3 gap-y-1.5 mt-3 justify-center">
         {categoryDistribution.map((item, i) => (
           <div key={item.name} className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full shrink-0" style={{ background: COLORS[i] }} />
-            <span className="text-[11px] text-text-muted">{item.name}</span>
+            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: COLORS[i] }} />
+            <span className="text-[10px] sm:text-[11px] text-text-muted">{item.name}</span>
           </div>
         ))}
       </div>

@@ -38,28 +38,29 @@ export default function SuppliersPage() {
       </div>
 
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-4 p-4 border-b border-surface-border bg-surface-card">
-        <div className="flex items-center gap-2">
-          <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-primary bg-surface hover:bg-surface-hover border border-surface-border rounded shadow-sm transition-colors">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-4 border-b border-surface-border bg-surface-card">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <button className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-primary bg-surface hover:bg-surface-hover border border-surface-border rounded shadow-sm transition-colors">
             <Plus size={14} className="text-amber-500" />
             New Supplier
           </button>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-primary bg-surface hover:bg-surface-hover border border-surface-border rounded shadow-sm transition-colors">
+          <button className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-primary bg-surface hover:bg-surface-hover border border-surface-border rounded shadow-sm transition-colors">
             <Trash2 size={14} className="text-amber-500" />
-            Remove Supplier
+            Remove
           </button>
         </div>
 
-        <div className="flex-1" />
+        <div className="hidden sm:block flex-1" />
 
-        <div className="flex items-center gap-2">
-          <label className="text-xs font-medium text-text-secondary">Search By Name:</label>
-          <div className="relative">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <label className="hidden md:block text-xs font-medium text-text-secondary whitespace-nowrap">Search By Name:</label>
+          <div className="relative flex-1 sm:flex-none">
             <input
               type="text"
+              placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-48 pl-2 pr-8 py-1.5 text-xs bg-surface border border-surface-border rounded focus:outline-none focus:ring-1 focus:ring-brand-500"
+              className="w-full sm:w-48 pl-2 pr-8 py-1.5 text-xs bg-surface border border-surface-border rounded focus:outline-none focus:ring-1 focus:ring-brand-500"
             />
           </div>
           <button className="px-3 py-1.5 text-xs font-medium text-white bg-brand-500 hover:bg-brand-600 rounded shadow-sm transition-colors">
