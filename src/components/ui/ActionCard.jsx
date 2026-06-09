@@ -1,11 +1,13 @@
 import React from 'react'
-import { ArrowRight, UserPlus, Search, FileBarChart, PlusCircle } from 'lucide-react'
+import { ArrowRight, UserPlus, Search, FileBarChart, PlusCircle, MessageSquare, Upload } from 'lucide-react'
 
 const iconMap = {
   UserPlus,
   Search,
   FileBarChart,
   PlusCircle,
+  MessageSquare,
+  Upload,
 }
 
 const colorMap = {

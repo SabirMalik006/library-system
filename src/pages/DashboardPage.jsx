@@ -142,21 +142,21 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <ActionCard
-          title="Member Registration"
-          desc="Register new library members"
-          icon="UserPlus"
+          title="Forum"
+          desc="Community discussions & help"
+          icon="MessageSquare"
           color="blue"
         />
         <ActionCard
-          title="Catalog Search"
-          desc="Search physical collections"
-          icon="Search"
+          title="Upload"
+          desc="Upload digital resources"
+          icon="Upload"
           color="purple"
         />
         <ActionCard
-          title="Generate Reports"
-          desc="Library usage & stats"
-          icon="FileBarChart"
+          title="Search"
+          desc="Search physical collections"
+          icon="Search"
           color="green"
         />
       </div>
