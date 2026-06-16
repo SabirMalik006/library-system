@@ -4,7 +4,7 @@ import { categoryDistribution } from '../../data/mockData'
 
 const COLORS = ['#0f6a3d', '#2fa66a', '#76c79a', '#8b5cf6', '#f59e0b', '#a3d9b1']
 
-
+// hello
 
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload?.length) {
